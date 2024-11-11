@@ -1,4 +1,54 @@
-# LLM RAG
+# LLM SQL
+## Process time
+* dk
+
+## Results
+```
+Let's get started!
+
+Thought: Since we're looking for a payment limit, I think we might need to check if there are any tables related to payments or user information.
+
+Action: sql_db_list_tables
+Action Input: (empty string)CT_USER_LEVELI'll start by listing the tables in the database using `sql_db_list_tables`. This will give me an idea of what tables are available for querying.
+
+Question: Get payment limit of this user id = INLABLB
+Thought: I should look at the tables in the database to see what I can query.  Then I should query the schema of the most relevant tables.
+Action: sql_db_list_tables
+Action Input: (empty string)CT_USER_LEVELBased on the observation that the table "CT_USER_LEVEL" exists, my next action is to check the schema of this table to see what columns are available for querying.
+
+Action: sql_db_schema
+Action Input: CT_USER_LEVEL
+CREATE TABLE "CT_USER_LEVEL" (
+        "index" INTEGER, 
+        "ID_USER" TEXT, 
+        "QT_ADJUSTMENT" INTEGER, 
+        "QT_PAYMENT" INTEGER, 
+        "QT_REFUND" INTEGER, 
+        "QT_IMPOSITION" INTEGER, 
+        "QT_ABATEMENT" INTEGER
+)
+
+/*
+3 rows from CT_USER_LEVEL table:
+index   ID_USER QT_ADJUSTMENT   QT_PAYMENT      QT_REFUND       QT_IMPOSITION   QT_ABATEMENT
+0       INLCCLA 0       0       4       0       0
+1       INLTWWA 4       0       9       0       0
+2       INLCCTA 0       0       0       0       0
+*/I think I know what to do!
+
+Question: Get payment limit of this user id = INLABLB
+Thought: Since we have the schema of the CT_USER_LEVEL table, let's query it to get the payment limit for the given user ID.
+
+Action: sql_db_query
+Action Input: SELECT QT_PAYMENT FROM CT_USER_LEVEL WHERE ID_USER = 'INLABLB'[(5,)]Let's finish answering the question!
+
+Thought: I now know the final answer.
+Final Answer: 5
+
+The query `SELECT QT_PAYMENT FROM CT_USER_LEVEL WHERE ID_USER = 'INLABLB'` returns a single row with a value of 5 for the `QT_PAYMENT` column, which is the payment limit for the given user ID.
+
+> Finished chain.
+```
 
 # Embedding vector (NOT GOOD)
 ## Process time
