@@ -48,7 +48,9 @@ db_engine = create_engine(f"mssql+pyodbc:///?odbc_connect={conn}")
 
 # Create a SQLDatabase instance
 db = SQLDatabase(db_engine)
-agent_executor = create_sql_agent(model, db=db, verbose=True)
+agent_executor = create_sql_agent(model, db=db, verbose=False, handle_parsing_errors=True)
+
+# print(agent_executor.invoke(question))
 
 answers = agent_executor.invoke(question)
 
