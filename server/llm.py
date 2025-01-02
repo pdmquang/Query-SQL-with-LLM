@@ -3,7 +3,6 @@ from langchain_community.agent_toolkits import create_sql_agent
 # from langchain_community.utilities import SQLDatabase
 from langchain.sql_database import SQLDatabase
 from sqlalchemy import create_engine
-import pyodbc
 
 model = ChatOllama(
     model="llama3:8b"
